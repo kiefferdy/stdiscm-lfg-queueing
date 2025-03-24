@@ -96,6 +96,11 @@ int main()
     std::cout << "Enter slowest clear time t2 (seconds): ";
     std::cin >> t2;
 
+    if (t2 < t1) {
+        std::cout << "Error: t2 cannot be less than t1.\n";
+        return 1;
+    }
+
     // Initialize the instances
     instances.resize(n);
     for (int i = 0; i < n; i++) {
@@ -160,14 +165,21 @@ int main()
     }
 
     // Print summary
-    std::cout << "\n========== Final Summary ==========\n";
+    std::cout << "\n============ Final Summary ============\n";
     int idx = 0;
     for (auto &inst : instances) {
         std::cout << "Instance " << idx++
                   << " served " << inst.partiesServed << " parties"
                   << " | Total time served: " << inst.totalTimeServed << "s\n";
     }
-    std::cout << "===================================\n";
+    std::cout << "=======================================\n";
 
+    // Print leftover players
+    std::cout << "\n========= Leftover Players =========\n";
+    std::cout << "Tanks  : " << tTanks << "\n";
+    std::cout << "Healers: " << tHeals << "\n";
+    std::cout << "DPS    : " << tDPS   << "\n";
+
+    std::cout << "====================================\n";
     return 0;
 }
