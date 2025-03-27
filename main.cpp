@@ -6,6 +6,7 @@
 #include <vector>
 #include <queue>
 #include <chrono>
+#include <limits>
 
 // Dungeon instance
 struct Instance {
@@ -85,19 +86,48 @@ int main()
     // Read user input
     std::cout << "Enter n (max concurrent instances): ";
     std::cin >> n;
+    if (!std::cin || n <= 0) {
+        std::cerr << "Error: 'n' must be a positive integer.\n";
+        return 1;
+    }
+
     std::cout << "Enter number of tanks in queue: ";
     std::cin >> tTanks;
+    if (!std::cin || tTanks < 0) {
+        std::cerr << "Error: number of tanks cannot be negative.\n";
+        return 1;
+    }
+
     std::cout << "Enter number of healers in queue: ";
     std::cin >> tHeals;
+    if (!std::cin || tHeals < 0) {
+        std::cerr << "Error: number of healers cannot be negative.\n";
+        return 1;
+    }
+
     std::cout << "Enter number of DPS in queue: ";
     std::cin >> tDPS;
+    if (!std::cin || tDPS < 0) {
+        std::cerr << "Error: number of DPS players cannot be negative.\n";
+        return 1;
+    }
+
     std::cout << "Enter fastest clear time t1 (seconds): ";
     std::cin >> t1;
+    if (!std::cin || t1 <= 0) {
+        std::cerr << "Error: 't1' must be a positive integer.\n";
+        return 1;
+    }
+
     std::cout << "Enter slowest clear time t2 (seconds): ";
     std::cin >> t2;
+    if (!std::cin || t2 <= 0) {
+        std::cerr << "Error: 't2' must be a positive integer.\n";
+        return 1;
+    }
 
     if (t2 < t1) {
-        std::cout << "Error: t2 cannot be less than t1.\n";
+        std::cerr << "Error: t2 cannot be less than t1.\n";
         return 1;
     }
 
@@ -179,7 +209,7 @@ int main()
     std::cout << "Tanks  : " << tTanks << "\n";
     std::cout << "Healers: " << tHeals << "\n";
     std::cout << "DPS    : " << tDPS   << "\n";
-
     std::cout << "====================================\n";
+
     return 0;
 }
